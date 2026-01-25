@@ -9,27 +9,22 @@ load_dotenv()
 url = os.environ.get("SUPABASE_URL")
 key = os.environ.get("SUPABASE_KEY")
 
-# 3. Kontrol Mekanizması (Güvenlik Önlemi)
-# Eğer anahtarlar bulunamazsa program çöker, böylece hatayı hemen fark ederiz.
+# 3. Kontrol Mekanizması
 if not url or not key:
     raise ValueError("HATA: .env dosyasında SUPABASE_URL veya SUPABASE_KEY eksik!")
 
-# 4. İstemciyi (Client) oluştur
-# Bu 'supabase' değişkenini diğer dosyalarda import ederek kullanacağız.
-supabase: Client = create_client(url, key)
-
-# ... (yukarıdaki kodlar aynen kalıyor)
+# 4. İstemciyi oluştur
+# DÜZELTME BURADA: Değişkenin adını 'supabase' yerine 'db_client' yaptık.
+# Artık diğer dosyalar bunu bulabilecek.
+db_client: Client = create_client(url, key)
 
 if __name__ == "__main__":
     try:
-        # Bağlantıyı test etmek için basit bir işlem yapalım
-        # Auth servisi hazır mı diye kontrol ediyoruz
         print("--- BAĞLANTI TESTİ BAŞLIYOR ---")
         print(f"Supabase URL: {url}")
         
-        # Eğer client oluştuysa ve auth servisine erişebiliyorsak bağlantı başarılıdır.
-        # Henüz giriş yapmadığımız için session 'None' dönecektir, bu normal.
-        session = supabase.auth.get_session()
+        # Test ederken de artık db_client kullanıyoruz
+        session = db_client.auth.get_session()
         print("Bağlantı Başarılı! Supabase ile iletişim kuruldu.")
         print("--- TEST TAMAMLANDI ---")
         
