@@ -23,7 +23,6 @@ class AppTheme:
                 on_primary="#ffffff",
                 secondary=AppTheme.niko_red,
                 tertiary=AppTheme.niko_yellow,
-                background=ft.Colors.WHITE,
                 surface=ft.Colors.GREY_50,
                 error=AppTheme.niko_red
             ),

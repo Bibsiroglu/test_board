@@ -15,23 +15,23 @@ class Router:
 
         self.body = ft.Container(expand=True)
 
-        def get_content(self):
-            return self.body
+    def get_content(self):
+        return self.body
 
-        def go(self, route_key):
+    def go(self, route_key):
 
-            if route_key in self.routes:
-                self.routes[route_key]()
-                self.page.update()
+        if route_key in self.routes:
+            self.routes[route_key]()
+            self.page.update()
 
-        def view_login(self):
-            self.body.content = LoginView(
-                self.page,
-                on_success=lambda: self.go("app")
-            )
-        
-        def view_main_app(self):
-            self.body.content = DashboardView(
-                self.page,
-                on_logout=lambda: self.go("login")
-            )
+    def view_login(self):
+        self.body.content = LoginView(
+            self.page,
+            on_success=lambda: self.go("app")
+        )
+    
+    def view_main_app(self):
+        self.body.content = DashboardView(
+            self.page,
+            on_logout=lambda: self.go("login")
+        )
